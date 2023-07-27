@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Site</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="prac9.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+</head>
+<body ng-app="prod" ng-controller="pitem">
+    <div id="page" class="site">
+
+
+        <aside class="site-off desktop-hide">
+            <div class="off-canvas">
+                <div class="canvas-head">
+                    <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                    <a href="" class="t-close flexcenter"><i class="ri-close-line"></i></a>
+                </div>
+                <div class="departments"></div>
+                <nav></nav>
+                <div class="thetop-nav"></div>
+            </div>
+        </aside>
+
+        <!-- Header  -->
+        <header>
+            <div class="header-top mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <ul class="flexitem main-links">
+                                <li><a href="" id="user" style="font-size: large; font-weight: 700; letter-spacing: 0.05ch; text-decoration: underline;"></a></li>
+                                <li><a href="">Blog</a></li>
+                                <li><a href="">Featured Products</a></li>
+                                <li><a href="">Wishlist</a></li>
+                            </ul>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem main-links">
+                                <li><a href="">Sign Up</a></li>
+                                <li><a href="">My Account</a></li>
+                                <li><a href="">Order Tracking</a></li>
+                                <li><a href="">INR<span class="icon-small"><i class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="">INR</a></li>
+                                        <li><a href="">Euro</a></li>
+                                        <li><a href="">BHD</a></li>
+                                        <li><a href="">USD</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">English<span class="icon-small"><i class="ri-arrow-down-s-line"></i></span></a>
+                                    <ul>
+                                        <li class="current"><a href="">English</a></li>
+                                        <li><a href="">Hindi</a></li>
+                                        <li><a href="">Spanish</a></li>
+                                        <li><a href="">Japanese</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="header-nav">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <a href="" class="trigger destop-hide"><span class="i ri-menu-2-line"></span></a>
+                        <div class="left flexitem">
+                            <div class="logo"><a href="/"><span class="circle"></span>.Store</a></div>
+                            <nav class="mobile-hide">
+                                <ul class="flexitem second-links">
+                                    <li><a href="">Home</a></li>
+                                    <li><a href="">Shop</a></li>
+                                    <li>
+                                        <a href="">Women
+                                            <div class="icon-small"><i class="ri-arrow-down-s-line"></i></div>
+                                        </a>
+                                    </li>
+                                    <li><a href="">Men</a></li>
+                                    <li>
+                                        <a href="">Sports
+                                            <div class="fly-item"><span>New!</span></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="right">
+                            <ul class="flexitem second-links">
+                                <li class="mobile-hide"><a href="">
+                                    <div class="icon-large"><i class="ri-heart-line"></i></div>
+                                    <div class="fly-item"><span class="item-number">0</span></div>
+                                </a></li>
+                                <li class="iscart"><a href="">
+                                    <div class="icon-large">
+                                        <i class="ri-shopping-cart-line"></i>
+                                        <div class="fly-item"><span class="item-number">{{totalitem}}</span></div>
+                                    </div>
+                                    <div class="icon-text">
+                                        <div class="mini-text">Total</div>
+                                        <div class="cart-total">₹{{totalAmount}}</div>
+                                    </div>
+                                </a>
+
+                                <div class="mini-cart">
+                                    <div class="content">
+                                        <div class="cart-head">
+                                            {{totalitem}} items in cart
+                                        </div>
+                                        <div class="cart-body">
+                                            <ul class="products mini">
+                                                <li class="item" ng-repeat="cartitem in cart" ng-if="!cartitem.removed">
+                                                    <div class="thumbnail object-cover">
+                                                        <a href=""><img ng-src="{{cartitem.image}}" alt=""></a>
+                                                    </div>
+                                                    <div class="item-content">
+                                                        <p><a href="">{{cartitem.content}}</a></p>
+                                                        <span class="price">
+                                                            <span>₹{{cartitem.price}}</span>
+                                                            <span class="fly-item"><span>{{cartitem.quantity}}x</span></span>
+                                                        </span>
+                                                        <span style="margin-left: 60px;"><i class="ri-indeterminate-circle-line" ng-click="removeone(cartitem)"></i></span>
+                                                        <span ><i class="ri-add-circle-line" ng-click="addone(cartitem)"></i></span>
+                                                    </div>
+                                                    <a class="item-remove"><i class="ri-close-line" ng-click="removeItem(cartitem)"></i></a>
+                                                </li>
+
+                                                <!-- <li class="item">
+                                                    <div class="thumbnail object-cover">
+                                                        <a href=""><img src="assets/products/home2.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="item-content">
+                                                        <p><a href="">Dimmable Ceiling Light Modern</a></p>
+                                                        <span class="price">
+                                                            <span>₹147.47</span>
+                                                            <span class="fly-item"><span>2x</span></span>
+                                                        </span>
+                                                    </div>
+                                                    <a href="" class="item-remove"><i class="ri-close-line"></i></a>
+                                                </li> -->
+
+                                            </ul>
+                                        </div>
+                                        <div class="cart-footer">
+                                            <div class="subtotal">
+                                                <p>Subtotal</p>
+                                                <p><strong>₹{{totalAmount}}</strong></p>
+                                            </div>
+                                            <div class="actions">
+                                                <a href="" class="secondary-button" ng-click="removeall()">Remove All items from Cart</a>
+                                                <a href="#single-checkout" class="primary-button">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Header Main  -->
+            <div class="header-main mobile-hide">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="left">
+                            <div class="dpt-cat">
+                                <div class="dpt-head">
+                                    <div class="main-text">All Department</div>
+                                    <mini-text class="mobile-hide">Total 1059 Products</mini-text>
+                                    <a href="" class="dpt-trigger mobile-hide">
+                                        <i class="ri-menu-3-line ri-xl"></i>
+                                    </a>
+                                </div>
+                                <div class="dpt-menu">
+                                    <ul class="second-links">
+                                        <li class="has-child beauty">
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-bear-smile-line"></i></div>
+                                                Beauty
+                                                <div class="icon-small"><i class="ri-arrow-right-s-line"></i></div>
+                                            </a>
+                                            <ul>
+                                                <li><a href="">Makeup</a></li>
+                                                <li><a href="">Skin Care</a></li>
+                                                <li><a href="">Hair Care</a></li>
+                                                <li><a href="">Fragrance</a></li>
+                                                <li><a href="">Foot & Hand Care</a></li>
+                                                <li><a href="">Tools & Accessories</a></li>
+                                                <li><a href="">Shave & Hair Removal</a></li>
+                                                <li><a href="">Personal Care</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-child electric">
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-bluetooth-connect-line"></i></div>
+                                                Electronic
+                                                <div class="icon-small"><i class="ri-arrow-right-s-line"></i></div>
+                                            </a>
+                                            <ul>
+                                                <li><a href="">Camera</a></li>
+                                                <li><a href="">Cell Phones</a></li>
+                                                <li><a href="">Computers</a></li>
+                                                <li><a href="">GPS & Navigation</a></li>
+                                                <li><a href="">Headphones</a></li>
+                                                <li><a href="">Home Audio</a></li>
+                                                <li><a href="">Television</a></li>
+                                                <li><a href="">Wearable Technology</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-child fashion">
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-t-shirt-air-line"></i></div>
+                                                Women's Fashion
+                                                <div class="icon-small"><i class="ri-arrow-right-s-line"></i></div>
+                                            </a>
+                                            <ul>
+                                                <li><a href="">Clothing</a></li>
+                                                <li><a href="">Shoes</a></li>
+                                                <li><a href="">Jwelery</a></li>
+                                                <li><a href="">Watches</a></li>
+                                                <li><a href="">Handbags</a></li>
+                                                <li><a href="">Accessories</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-shirt-line"></i></div>
+                                                Men's Fashion
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-user-5-line"></i></div>
+                                                Girl's Fashion
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-user-6-line"></i></div>
+                                                Boy's Fashion
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-heart-pulse-line"></i></div>
+                                                Health & Household
+                                            </a>
+                                        </li>
+                                        <li class="has-child homekit">
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-home-8-line"></i></div>
+                                                Home & Kitchen
+                                                <div class="icon-small"><i class="ri-arrow-right-s-line"></i></div>
+                                            </a>
+                                            <ul>
+                                                <li><a href="">Kitchen</a></li>
+                                                <li><a href="">Dining Room</a></li>
+                                                <li><a href="">Pantry</a></li>
+                                                <li><a href="">Great Room</a></li>
+                                                <li><a href="">Breakfast Nook</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-android-line"></i></div>
+                                                Pet Supplies
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-football-line"></i></div>
+                                                Sports
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <div class="icon-large"><i class="ri-shield-star-line"></i></div>
+                                                Best Seller
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="search-box">
+                                <form action="" class="search">
+                                    <span class="icon-large"><i class="ri-search-line"></i></span>
+                                    <input type="search" placeholder="Search for products">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Main  -->
+        <main >
+            <div class="slider">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="swiper myswiperslider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="assets/slider/slider0.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Shoes Fashion</h4>
+                                            <h2><span>Come and Get it!</span><br><span>Brand New Shoes</span></h2>
+                                            <a href="" class="primary-button">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="assets/slider/slider1.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Quick Fashion</h4>
+                                            <h2><span>Fit Your Wardrobe</span><br><span>With Luxury Items</span></h2>
+                                            <a href="" class="primary-button">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="assets/slider/slider2.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Quick Offer</h4>
+                                            <h2><span>Wodden minimal Sofa</span><br><span>Extra 50% off</span></h2>
+                                            <a href="" class="primary-button">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="item">
+                                        <div class="image object-cover">
+                                            <img src="assets/slider/slider3.jpg" alt="">
+                                        </div>
+                                        <div class="text-content flexcol">
+                                            <h4>Best Deals</h4>
+                                            <h2><span>Home Workout Accessories</span><br><span>Push the limit</span></h2>
+                                            <a href="" class="primary-button">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brands  -->
+            <div class="brands">
+                <div class="container">
+                    <div class="wrapper flexitem">
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/zara.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/samsung.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/oppo.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/asus.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/hurley.png" alt="">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="">
+                                <img src="assets/brands/dng.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trending  -->
+            <div class="trending">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="sectop flexitem">
+                            <h2><span class="circle"></span><span>Trending Products</span></h2>
+                        </div>
+                        <div class="column">
+                            <div class="flexwrap">
+                                <div class="row products big">
+                                    <!-- <div class="item">
+                                        <div class="offer">
+                                            <p>Offer ends at</p>
+                                            <ul class="flexcenter">
+                                                <li>1</li>
+                                                <li>15</li>
+                                                <li>27</li>
+                                                <li>47</li>
+                                            </ul>
+                                        </div>
+                                        <div class="media">
+                                            <div class="image">
+                                                <a href="">
+                                                    <img src="assets/products/apparel4.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-shopping-cart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>31%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <h3 class="main-links"><a href="">Happy Sailed Womens Summer Boho Floral</a></h3>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="stock mini-text">
+                                                <div class="qty">
+                                                    <span>Stock: <strong class="qty-available">147</strong></span>
+                                                    <span>Sold: <strong class="qty-sold">107</strong></span>
+                                                </div>
+                                                <div class="bar">
+                                                    <div class="available"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+
+                                    <div class="item" ng-repeat="pro in OfferProduct">
+                                        <div class="offer">
+                                            <p>Offer ends at</p>
+                                            <ul class="flexcenter">
+                                                <li>1</li>
+                                                <li>15</li>
+                                                <li>27</li>
+                                                <li>47</li>
+                                            </ul>
+                                        </div>
+                                        <div class="media">
+                                            <div class="image">
+                                                <a href="">
+                                                    <img ng-src="{{pro.image}}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-shopping-cart-line" ng-click="addtoCart(pro)"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>{{pro.discount}}</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">{{pro.rating}}</span>
+                                            </div>
+                                            <h3 class="main-links"><a href="">{{pro.content}}</a></h3>
+                                            <div class="price">
+                                                <span class="current">₹{{pro.price}}</span>
+                                                <span class="normal mini-text">{{pro.oprice}}</span>
+                                            </div>
+                                            <div class="stock mini-text">
+                                                <div class="qty">
+                                                    <span>Stock: <strong class="qty-available">{{pro.avail}}</strong></span>
+                                                    <span>Sold: <strong class="qty-sold">{{pro.sold}}</strong></span>
+                                                </div>
+                                                <div class="bar">
+                                                    <div class="available"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row products mini" >
+                                    <!-- <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img src="assets/products/apparel3.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-heart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>32%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">Black Women's Coat Dress</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>2947 sold</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img src="assets/products/apparel1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-heart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>32%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">Under Armour Men's Tech</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>2947 sold</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img src="assets/products/home1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-heart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>32%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">Vonada Velvet Sofa Coach</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>2947 sold</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img src="assets/products/electronic3.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-heart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>32%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">Wireless Headphones (Over Ear)</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>2947 sold</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+
+                                    
+
+                                    <div class="item" ng-repeat="pro in products">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img ng-src="{{pro.image}}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-shopping-cart-line" ng-click="addtoCart(pro)"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>{{pro.discount}}</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">{{ pro.content }}</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">{{pro.rating}}</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹{{pro.price}}</span>
+                                                <span class="normal mini-text">{{pro.oprice}}</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>{{pro.sold}}</p>
+                                                <p>{{pro.remark}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="row products mini" >
+                                    <!-- <div class="item">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img src="assets/products/shoe1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-heart-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>32%</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">Men slip on Shoes Casual with Arch Support Insoles</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">(2,548)</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹479.99</span>
+                                                <span class="normal mini-text">₹579.99</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>2947 sold</p>
+                                                <p>Free Shipping</p>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+
+
+
+
+                                    <div class="item" ng-repeat="pro in products1">
+                                        <div class="media">
+                                            <div class="thumbnail object-cover">
+                                                <a href="">
+                                                    <img ng-src="{{pro.image}}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="hoverable">
+                                                <ul>
+                                                    <li class="active"><a href=""><i class="ri-shopping-cart-line" ng-click="addtoCart(pro)"></i></a></li>
+                                                    <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                    <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="discount circle flexcenter"><span>{{pro.discount}}</span></div>
+                                        </div>
+                                        <div class="content">
+                                            <h3 class="main-links"><a href="">{{pro.content}}</a></h3>
+                                            <div class="rating">
+                                                <div class="stars"></div>
+                                                <span class="mini-text">{{pro.rating}}</span>
+                                            </div>
+                                            <div class="price">
+                                                <span class="current">₹{{pro.price}}</span>
+                                                <span class="normal mini-text">{{pro.oprice}}</span>
+                                            </div>
+                                            <div class="mini-text">
+                                                <p>{{pro.sold}}</p>
+                                                <p>{{pro.remark}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="features">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="column">
+                            <div class="sectop flexitem">
+                                <h2><span class="circle"></span><span>Featured Products</span></h2>
+                                <div class="second-links">
+                                    <a href="" class="view-all">View All<i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="products main flexwrap">
+                                <div class="item" ng-repeat="pro in featureproducts">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="">
+                                                <img ng-src="{{pro.image}}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href=""><i class="ri-shopping-cart-line" ng-click="addtoCart(pro)"></i></a></li>
+                                                <li><a href=""><i class="ri-eye-line"></i></a></li>
+                                                <li><a href=""><i class="ri-heart-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>{{pro.discount}}</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="rating">
+                                            <div class="stars"></div>
+                                            <span class="mini-text">{{pro.rating}}</span>
+                                        </div>
+                                        <h3 class="main-links"><a href="">{{pro.content}}</a></h3>
+                                        <div class="price">
+                                            <span class="current">₹{{pro.price}}</span>
+                                            <span class="normal mini-text">{{pro.oprice}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="single-checkout" id="single-checkout">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="checkout flexwrap">
+                            <div class="item left styled">
+                                <h1>Shipping Address</h1>
+                                <form>
+                                    <p>
+                                        <label for="email">Email Address <span></span></label>
+                                        <input type="email" name="email" id="email" required>
+                                        <div id="email_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="fname">First Name <span></span></label>
+                                        <input type="text" id="fname" required>
+                                        <div id="fname_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="lname">Last Name <span></span></label>
+                                        <input type="text" id="lname"  required>
+                                        <div id="lname_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="cname">Company Name</label>
+                                        <input type="text" id="cname">
+                                    </p>
+                                    <p>
+                                        <label for="addr">Street Address <span></span></label>
+                                        <input type="text" id="addr" required>
+                                        <div id="addr_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="city">City <span></span></label>
+                                        <input type="text" id="city" required>
+                                        <div id="city_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="state">State/Province <span></span></label>
+                                        <input type="text" id="state" required>
+                                        <div id="state_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="postal">Zip/ Postal Code <span></span></label>
+                                        <input type="number" id="postal" required>
+                                        <div id="postal_error"></div>
+                                    </p>
+                                    <p>
+                                        <label for="phone">Phone Number <span></span></label>
+                                        <input type="number" id="phone" >
+                                        <div id="phone_error"></div>
+                                    </p>
+                                    <p>
+                                        <label>Order Notes(Optional)</label>
+                                        <textarea cols="30" rows="10"></textarea>
+                                    </p>
+                                    
+                                
+                                <div class="shipping-methods">
+                                    <h2>Shipping-Methods</h2>
+                                    <p class="checkset">
+                                        <input type="radio" checked> <label>₹0.00 Free Delivery</label>
+                                    </p>
+                                </div>
+                                <div class="primary-checkout">
+                                    <button class="primary-button" type="submit" onclick="validation()" ng-disabled="totalAmount==0">Place Order</button>
+                                </div>
+                            </form> 
+                            </div>
+                            <div class="item right">
+                                <h2>Order Summary</h2>
+                                <div class="summary-order is_sticky">
+                                    <div class="summary-totals">
+                                        <ul>
+                                            <li>
+                                                <span>Subtotal</span>
+                                                <span>₹{{totalAmount}}</span>
+                                            </li>
+                                            <li>
+                                                <span>Shipping: Free</span>
+                                                <span>₹0.00</span>
+                                            </li>
+                                            <li>
+                                                <span>Total</span>
+                                                <strong>₹{{totalAmount}}</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <footer>
+            <div class="newsletter">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="box">
+                            <div class="content">
+                                <h3>Join Our Newsletter</h3>
+                                <p>Get E-mail Updates about our latest shop and <strong>special offers</strong></p>
+                            </div>
+                            <form action="" class="search">
+                                <span class="icon-large"><i class="ri-mai-line"></i></span>
+                                <input type="mail" placeholder="Your Email Address">
+                                <button type="submit">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let user = JSON.parse(localStorage.getItem("LoggedInUser"))
+        let username = user['fname']
+        document.getElementById('user').innerHTML=username
+        function validation(){
+            let flag=true
+            /*Name Validation*/
+            let fname=document.getElementById("fname").value;
+            let lname=document.getElementById("lname").value;
+            if(fname==""){
+                flag=false
+                document.getElementById("fname_error").innerHTML="Enter First Name";
+            }
+            else if(lname==""){
+                flag=false
+                document.getElementById("lname_error").innerHTML="Enter Last Name";
+            }
+            else{
+                document.getElementById("fname_error").innerHTML="";
+                document.getElementById("lname_error").innerHTML="";
+            }
+            /*Name Validation END*/
+
+            /*Email Validation*/
+            let email=document.getElementById("email").value;
+            email=email.toLowerCase();
+            if( email=""){
+                flag=false
+                document.getElementById("email_error").innerHTML="Enter valid Email"
+            }
+            else{
+                document.getElementById("email_error").innerHTML=""
+            }
+            /*Email Validation END*/            
+
+            /*Password Validation*/
+            // let password=document.getElementById("password").value
+            // let retypepassword=document.getElementById("retypepassword").value
+            // let uppercase_condition=/[A-Z]/.test(password)
+            // let lowercase_condition=/[a-z]/.test(password)
+            // let digit_condition=/\d/.test(password)
+            // let min_length_condition = password.length>=8
+            // if(uppercase_condition && lowercase_condition && digit_condition && min_length_condition){
+            //     if(password===retypepassword){
+            //         document.getElementById("pass_error").innerHTML=""
+            //     }
+            //     else{
+            //         flag=false
+            //         document.getElementById("pass_error").innerHTML="Password and Retype Password must be same"
+            //     }
+            // }
+            // else{
+            //     flag=false
+            //     document.getElementById("pass_error").innerHTML="Password must contain digits, UpperCase, \
+            //     LowerCase and minimum 8 characters"
+            // }
+            /*Password Validation END*/
+
+            /*Mobile No. Validation*/
+            let mobileno=document.getElementById("phone").value;
+            if(mobileno.length==10 && /^\d{10}$/.test(mobileno)){
+                document.getElementById("phone_error").innerHTML=""
+                // concole.log(typeof mobileno)
+            }
+            else{
+                flag=false
+                document.getElementById("phone_error").innerHTML="Enter Valid Mobile No."
+            }
+            /*Mobile No. Validation END*/
+
+            /*Today's Date if date is blanked*/
+
+            let addr = document.getElementById('addr').value
+            if(addr=""){
+                flag=false
+                document.getElementById("addr_error").innerHTML="Enter Address for Shipping";
+            }
+            let city = document.getElementById('city').value
+            if(city=""){
+                flag=false
+                document.getElementById("city_error").innerHTML="Enter City Name for Shipping";
+            }
+            let state = document.getElementById('state').value
+            if(state=""){
+                flag=false
+                document.getElementById("state_error").innerHTML="Enter Address for Shipping";
+            }
+            let postal = document.getElementById('postal').value
+            if(postal.length==6 && /^\d{6}$/.test(postal)){
+                document.getElementById("postal_error").innerHTML=""
+            }
+            else{
+                flag=false
+                console.log('hello',postal, postal.length, /^\d{6}$/.test(postal))
+                document.getElementById("postal_error").innerHTML="Enter valid Postal code";
+            }
+
+            if(flag==false){
+                console.log('false')
+            }
+            if(flag==true){
+                console.log('true')
+                alert('Form is Successfully submitted.')
+                alert('Your Order will placed after payment.\nYou can live track your order until it\'s delivered' );
+            }
+        }
+        </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="script9.js"></script>
+
+
+
+    
+</body>
+</html>
